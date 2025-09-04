@@ -1,0 +1,328 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abhijitgarai.com</title>
+  <style>
+    :root{
+      --accent:#1d4ed8;
+      --muted:#6b7280;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    body{margin:0;background:var(--bg);color:#0f172a}
+    /* NAV */
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:linear-gradient(180deg,rgba(255, 11, 11, 1),rgba(1, 24, 255, 1));backdrop-filter: blur(4px);box-shadow:0 1px 0 rgba(0,0,0,0.04)}
+    .nav-left{display:flex;align-items:center;gap:12px}
+    .avatar{width:44px;height:44px;border-radius:8px;object-fit:cover;border:2px solid #FFFFFF;box-shadow:0 2px 6px rgba(16,24,40,0.06)}
+    .brand{font-weight:600;font-size:1.05rem}
+    .nav-right{display:flex;align-items:center;gap:8px}
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:transparent;border:1px solid transparent;cursor:pointer}
+    .icon-btn:hover{background:rgba(15,23,42,0.004)}
+    .menu{position:relative}
+    .dropdown{position:absolute;right:0;top:calc(100% + 8px);background:var(--card);box-shadow:0 6px 18px rgba(10,10,10,0.08);border-radius:10px;padding:10px;width:220px;border:1px solid rgba(15,23,42,0.04);display:none}
+    .dropdown.show{display:block}
+    .contact-row{display:flex;flex-direction:column;gap:6px}
+    .contact-item{font-size:0.95rem;color:#0f172a}
+    .contact-label{font-size:0.75rem;color:var(--muted)}
+    /* SEARCH BAR (hidden until clicked for mobile) */
+    .search-wrap{position:relative}
+    .search-input{width:360px;max-width:60vw;padding:10px 12px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);outline:none}
+    .search-input:focus{box-shadow:0 4px 20px rgba(29,78,216,0.08);border-color:var(--accent)}
+    /* LAYOUT */
+    main{padding:22px;max-width:1100px;margin:18px auto}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(15,23,42,0.04);box-shadow:0 6px 18px rgba(2,6,23,0.03)}
+    .card h3{margin:0 0 6px 0;font-size:1.03rem}
+    .card p{margin:0 0 10px 0;color:var(--muted);font-size:0.95rem}
+    .meta{display:flex;justify-content:space-between;align-items:center}
+    .btn{padding:12px 30px;border-radius:8px;border:0;background:var(--accent);color:#FFFFFF;cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(255, 255, 255, 1)}
+    /* tiny helpers */
+    .muted{color:var(--muted);font-size:0.92rem}
+    .hidden{display:none}
+    @media (max-width:720px){
+      .search-input{width:160px}
+      .search-input.hide-mobile{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-left">
+      <img src="logo.png" alt="Profile" class="avatar" id="profileImg">
+      <div class="brand" style="color:#fff;">ABHIJIT EDITOR</div>
+    </div><div class="nav-right">
+  <div class="search-wrap">
+    <input type="search" id="searchInput" class="search-input" placeholder="Search posts"Search posts">
+  </div>
+
+  <div class="menu" style="margin-left:6px"><button class="icon-btn" id="menuBtn" aria-haspopup="true" aria-expanded="false" title="Menu" style="color:#fff;">| | |</button>
+    <div class="dropdown" id="menuDropdown" role="menu" aria-hidden="true">
+      <div class="contact-row">
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-item" id="email"><img src="icon2.png" alt="icon" style="width:34px; vertion-sligh:middle;"></div>
+        </div>abhijitgarai774@gmail.com
+        <div>
+          <div class="contact-label">Instagram</div>
+        <div class="contact-item" id="Instagram"><img src="icon3.png" alt="icon" style="width:40px; vertion-sligh:middle;"></div>SAPABHIJIT
+        </div>
+        <div>
+          <div class="contact-label">Facebook</div>
+       <div class="contact-item" id="Facebook"><img src="icon.png" alt="icon" style="width:40px; vertion-sligh:middle;"></div>SAPABHIJIT</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </header>  <main>
+    <section style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h2 style="margin:0">Posts</h2>
+      <div class="muted" id="resultsCount">Showing 0 posts</div>
+    </section><section class="grid" id="postsGrid" aria-live="polite">
+  <!-- JS will populate posts here -->
+</section>
+
+  </main>  <template id="postTpl">
+    <article class="card">
+      <img src="" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:10px;" class="post-img">
+      <h3 class="post-title"></h3>
+      <p class="post-desc"></p>
+      <div class="meta">
+        <div class="muted post-price"></div>
+        <div>
+          <button class="btn orderBtn">Order</button
+          </button>
+        </div>
+      </div>
+    </div><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Posts with Buttons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0px;
+      background: #f4f4f4;
+    }
+    .post {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .action-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 59px;
+      cursor: pointer;
+      margin-right: 5px;
+      display: inline-flex;
+      align-items: center;
+      font-size: 14px;
+    }
+    .action-btn i {
+      margin-right: 5px;
+    }
+    .action-btn:hover {
+      background: #0056b3;
+    }
+    .action-btn:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+    .comment-box {
+      display: none;
+      margin-top: 10px;
+    }
+    .comment-box textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+    .comment-box button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .comment-box button:hover {
+      background: #0056b3;
+    }
+    .comments-list {
+      margin-top: 10px;
+    }
+    .comments-list p {
+      background: #f1f1f1;
+      padding: 6px;
+      border-radius: 4px;
+      margin: 3px 0;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+
+  <div class="post">
+
+    <div class="post-actions">
+      <button class="action-btn" onclick="likePost(this)"><i class="fas fa-thumbs-up"></i> Like (<span class="like-count">0</span>)</button>
+      <button class="action-btn" onclick="toggleCommentBox(this)"><i class="fas fa-comment"></i> Comment</button>
+      <button class="action-btn" onclick="sharePost()"><i class="fas fa-share"></i> Share</button>
+    </div>
+    <!-- Comment Box -->
+    <div class="comment-box">
+      <textarea placeholder="Write a comment..."></textarea>
+      <button onclick="postComment(this)">send</button>
+      <div class="comments-list"></div>
+    </div>
+  </div>
+
+  
+  <script>
+    function likePost(button) {
+      let countSpan = button.querySelector('.like-count');
+      let count = parseInt(countSpan.textContent);
+      count++;
+      countSpan.textContent = count;
+      button.disabled = true; // একবার লাইক করার পর disable
+    }
+
+    function toggleCommentBox(button) {
+      let post = button.closest('.post');
+      let commentBox = post.querySelector('.comment-box');
+      commentBox.style.display = commentBox.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function postComment(button) {
+      let commentBox = button.closest('.comment-box');
+      let textarea = commentBox.querySelector('textarea');
+      let commentsList = commentBox.querySelector('.comments-list');
+
+      if (textarea.value.trim() !== "") {
+        let comment = document.createElement('p');
+        comment.textContent = textarea.value;
+        commentsList.appendChild(comment);
+        textarea.value = "";
+      }
+    }
+
+    function sharePost() {
+      const shareData = {
+        title: 'My Business Post',
+        text: 'Check out this post!',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch(err => console.log('Share failed:', err));
+      } else {
+        navigator.clipboard.writeText(window.location.href)
+          .then(() => alert("Post link copied to clipboard!"))
+          .catch(() => alert("Failed to copy link."));
+      }
+    }
+  </script>
+
+</body>
+</html>
+    </article>
+  </template>  <script>
+    // Sample data - replace with dynamic data as needed
+    const POSTS = [
+      {id:1,title:'✨ ABHI LOGO DESIGN ✨',desc:'It is designed for a digital marketing and design service, where services like logos, YouTube banners, thumbnails, intros, and video editing are provided at affordable prices.',price:'₹199',tags:['rice','grain'] ,img:'https://i.postimg.cc/nrd0Zdyr/Facebook-creation-7214986439501043329.jpg'},
+      {id:2,title:'Modern Visiting Card Creator',desc:'I am a professional visiting card designer, creating modern, stylish, and unique business cards that make your brand stand out. I provide custom designs tailored to your needs to leave a lasting impression.',price:'₹135',tags:['vegetables','organic'] ,img:'https://i.postimg.cc/xdPSjk0C/20250529-105019.jpg'},
+      {id:3,title:'My Design Skills',desc:'I am an experienced graphic designer, who is skilled in creating all types of designs.My goal is to create creative and effective designs according to the clients needs.',price:'₹159',tags:['bags','jute'] ,img:'https://i.postimg.cc/HsRrCNxx/20250602-051718.jpg'},
+    ];
+
+    const postsGrid = document.getElementById('postsGrid');
+    const tpl = document.getElementById('postTpl');
+    const searchInput = document.getElementById('searchInput');
+    const resultsCount = document.getElementById('resultsCount');
+
+    function renderPosts(list){
+      postsGrid.innerHTML = '';
+      if(!list.length){
+        postsGrid.innerHTML = '<div class="muted">No posts found.</div>';
+      }
+      list.forEach(p=>{
+        const node = tpl.content.cloneNode(true);
+        node.querySelector('.post-img').src = p.img;
+        node.querySelector('.post-img').alt = p.title;
+        node.querySelector('.post-title').textContent = p.title;
+        node.querySelector('.post-desc').textContent = p.desc;
+        node.querySelector('.post-price').textContent = p.price;
+        const orderBtn = node.querySelector('.orderBtn');
+        orderBtn.addEventListener('click',()=>handleOrder(p));
+        postsGrid.appendChild(node);
+      });
+      resultsCount.textContent = `Showing ${list.length} post${list.length!==1?'s':''}`;
+    }
+
+    function handleOrder(post){
+      const contactEmail = document.getElementById('email').textContent;
+      // Simple ordering experience: open mailto with subject
+      const subject = encodeURIComponent(`Order: ${post.title}`);
+      const body = encodeURIComponent(`Hello,%0AI would like to order:\n- ${post.title}\nPrice: ${post.price}\n%0APlease get in touch with details.%0AThanks!`);
+      window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+    }
+
+    // SEARCH (filters by title, desc, tags)
+    function filterPosts(q){
+      const term = (q||'').trim().toLowerCase();
+      if(!term) return POSTS.slice();
+      return POSTS.filter(p=>{
+        return p.title.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term) || (p.tags && p.tags.join(' ').includes(term));
+      });
+    }
+
+    searchInput.addEventListener('input', (e)=>{
+      const q = e.target.value;
+      const filtered = filterPosts(q);
+      renderPosts(filtered);
+    });
+
+    // MENU
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDropdown = document.getElementById('menuDropdown');
+    menuBtn.addEventListener('click', (e)=>{
+      const showing = menuDropdown.classList.toggle('show');
+      menuBtn.setAttribute('aria-expanded', showing);
+      menuDropdown.setAttribute('aria-hidden', !showing);
+    });
+    // close when clicking outside
+    document.addEventListener('click', (e)=>{
+      if(!menuDropdown.contains(e.target) && !menuBtn.contains(e.target)){
+        menuDropdown.classList.remove('show');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuDropdown.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    // initial render
+    renderPosts(POSTS);
+
+    // Accessibility: allow search with '/' key
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === '/'){
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+  </script></body>
+</html>
